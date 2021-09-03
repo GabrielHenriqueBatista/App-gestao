@@ -60,7 +60,7 @@
                             </div>
                         </div><!--/fim textos da seção -->
                         <div class="col-md-6 d-none d-md-block">
-                           <img src="{{ asset('img/facil.png') }}" height="400" width="700"/>
+                           <img src="{{ asset('img/facil.png') }}" height="300" width="600"/>
                         </div>
                     </div>
                 </div>
