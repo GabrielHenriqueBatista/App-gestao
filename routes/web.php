@@ -20,3 +20,16 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('despesas', 'DespesaController@store')->name('despesas');
+Route::middleware(['auth:sanctum', 'verified'])->get('despesas', 'DespesaController@despesas')->name('despesas');
+Route::middleware(['auth:sanctum', 'verified'])->get('consulta-despesa', 'ConsultaDespesaController@consultaDespesa')->name('consulta-despesa');
+Route::middleware(['auth:sanctum', 'verified'])->get('consulta-despesa', 'ConsultaDespesaController@show')->name('consulta-despesa');
+Route::middleware(['auth:sanctum', 'verified'])->get('consulta-despesa/{id}', 'ConsultaDespesaController@destroy')->name('excluir');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('compras', 'ComprasController@compras')->name('compras');
+Route::middleware(['auth:sanctum', 'verified'])->get('consulta-compras', 'ConsultaComprasController@consultaCompras')->name('consulta-compras');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('faturamento', 'FaturamentoController@faturamento')->name('faturamento');;
+Route::middleware(['auth:sanctum', 'verified'])->get('consulta-faturamento', 'ConsultaFaturamentoController@consultafaturamento')->name('consulta-faturamento');
+
