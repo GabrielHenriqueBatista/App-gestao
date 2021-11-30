@@ -1,5 +1,5 @@
 
-class Despesa {
+class Compras {
 	constructor(ano, mes, dia, tipo, descricao, valor) {
 		this.ano = ano
 		this.mes = mes
@@ -44,74 +44,74 @@ class Bd {
 
 	recuperarTodosRegistros() {
 
-		//array de despesas
-		let despesas = Array()
+		//array de compras
+		let compras = Array()
 
 		let id = localStorage.getItem('id')
 
-		//recuperar todas as despesas cadastradas em localStorage
+		//recuperar todas as compras cadastradas em localStorage
 		for(let i = 1; i <= id; i++) {
 
-			//recuperar a despesa
-			let despesa = JSON.parse(localStorage.getItem(i))
+			//recuperar a compras
+			let compra = JSON.parse(localStorage.getItem(i))
 
 			//existe a possibilidade de haver índices que foram pulados/removidos
 
-			if(despesa === null) {
+			if(compra === null) {
 				continue
 			}
-			despesa.id = i
-			despesas.push(despesa)
+			compra.id = i
+			compras.push(compra)
 		}
 
-		return despesas
+		return compras
 	}
 
-	pesquisar(despesa){
+	pesquisar(compra){
 
-		let despesasFiltradas = Array()
-		despesasFiltradas = this.recuperarTodosRegistros()
-		console.log(despesasFiltradas);
-		console.log(despesa)
+		let comprasFiltradas = Array()
+		comprasFiltradas = this.recuperarTodosRegistros()
+		console.log(comprasFiltradas);
+		console.log(compra)
 
 		//ano
-		if(despesa.ano != ''){
+		if(compra.ano != ''){
 			console.log("filtro de ano");
-			despesasFiltradas = despesasFiltradas.filter(d => d.ano == despesa.ano)
+			comprasFiltradas = comprasFiltradas.filter(d => d.ano == compra.ano)
 		}
 			
 		//mes
-		if(despesa.mes != ''){
+		if(compra.mes != ''){
 			console.log("filtro de mes");
-			despesasFiltradas = despesasFiltradas.filter(d => d.mes == despesa.mes)
+			comprasFiltradas = comprasFiltradas.filter(d => d.mes == compra.mes)
 		}
 
 		//dia
-		if(despesa.dia != ''){
+		if(compra.dia != ''){
 			console.log("filtro de dia");
-			despesasFiltradas = despesasFiltradas.filter(d => d.dia == despesa.dia)
+			comprasFiltradas = comprasFiltradas.filter(d => d.dia == compra.dia)
 		}
 
 		//tipo
-		if(despesa.tipo != ''){
+		if(compra.tipo != ''){
 			console.log("filtro de tipo");
-			despesasFiltradas = despesasFiltradas.filter(d => d.tipo == despesa.tipo)
+			comprasFiltradas = comprasFiltradas.filter(d => d.tipo == compra.tipo)
 		}
 
 		//descricao
-		if(despesa.descricao != ''){
+		if(compra.descricao != ''){
 			console.log("filtro de descricao");
-			despesasFiltradas = despesasFiltradas.filter(d => d.descricao == despesa.descricao)
+			comprasFiltradas = comprasFiltradas.filter(d => d.descricao == compra.descricao)
 		}
 
 		//valor
-		if(despesa.valor != ''){
+		if(compra.valor != ''){
 			console.log("filtro de valor");
-			despesasFiltradas = despesasFiltradas.filter(d => d.valor == despesa.valor)
+			comprasFiltradas = comprasFiltradas.filter(d => d.valor == compra.valor)
 		}
 
 		
-		return despesasFiltradas
+		return comprasFiltradas
 
 	}
 
@@ -119,7 +119,8 @@ class Bd {
 		localStorage.removeItem(id)
 	}
 }
-function cadastrarDespesa() {
+let bd = new Bd()
+function cadastrarCompra() {
 
 	let ano = document.getElementById('ano')
 	let mes = document.getElementById('mes')
@@ -128,7 +129,7 @@ function cadastrarDespesa() {
 	let descricao = document.getElementById('descricao')
 	let valor = document.getElementById('valor')
 
-	let despesa = new Despesa(
+	let compra = new Compras(
 		ano.value, 
 		mes.value, 
 		dia.value, 
@@ -136,16 +137,16 @@ function cadastrarDespesa() {
 		descricao.value,
 		valor.value
 	)
-	if(despesa.validarDados()) {
-		
+	if(compra.validarDados()) {
+		bd.gravar(compra)
 
 		document.getElementById('modal_titulo').innerHTML = 'Registro inserido com sucesso'
 		document.getElementById('modal_titulo_div').className = 'modal-header text-success'
-		document.getElementById('modal_conteudo').innerHTML = 'Despesa foi cadastrada com sucesso!'
+		document.getElementById('modal_conteudo').innerHTML = 'Compra foi cadastrada com sucesso!'
 		document.getElementById('modal_btn').innerHTML = 'Voltar'
 		document.getElementById('modal_btn').className = 'btn btn-success'
 		//dialog de sucesso
-		$('#modalRegistraDespesa').modal('show') 
+		$('#modalRegistraCompra').modal('show') 
 		ano.value = '' 
 		mes.value = ''
 		dia.value = ''
@@ -159,19 +160,19 @@ function cadastrarDespesa() {
 		document.getElementById('modal_btn').innerHTML = 'Voltar e corrigir'
 		document.getElementById('modal_btn').className = 'btn btn-danger'
 		//dialog de erro
-		$('#modalRegistraDespesa').modal('show') 
+		$('#modalRegistraCompra').modal('show') 
 	}
 }
-function carregaListaDespesas(despesas = Array(), filtro = false) {
-    if(despesas.length == 0 && filtro == false){
-		despesas = bd.recuperarTodosRegistros() 
+function carregaListaCompras(compras = Array(), filtro = false) {
+    if(compras.length == 0 && filtro == false){
+		compras = bd.recuperarTodosRegistros() 
 	}
-	let listaDespesas = document.getElementById("listaDespesas")
-    listaDespesas.innerHTML = ''
-	despesas.forEach(function(d){
+	let listaCompras = document.getElementById("listaCompras")
+    listaCompras.innerHTML = ''
+	compras.forEach(function(d){
 
 		//Criando a linha (tr)
-		var linha = listaDespesas.insertRow();
+		var linha = listaCompras.insertRow();
 
 		//Criando as colunas (td)
 		linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}` 
@@ -180,13 +181,9 @@ function carregaListaDespesas(despesas = Array(), filtro = false) {
 		switch(d.tipo){
 			case '1': d.tipo = 'Alimentação'
 				break
-			case '2': d.tipo = 'Aluguel'
+			case '2': d.tipo = 'Bebidas'
 				break
-			case '3': d.tipo = 'Bebidas'
-				break
-			case '4': d.tipo = 'Energia'
-				break
-			case '5': d.tipo = 'Transporte'
+			case '3': d.tipo = 'Outros'
 				break
 			
 		}
@@ -198,9 +195,9 @@ function carregaListaDespesas(despesas = Array(), filtro = false) {
 		let btn = document.createElement('button')
 		btn.className = 'btn btn-danger'
 		btn.innerHTML = '<i class="fa fa-times"  ></i>'
-		btn.id = `id_despesa_${d.id}`
+		btn.id = `id_compra_${d.id}`
 		btn.onclick = function(){
-			let id = this.id.replace('id_despesa_','')
+			let id = this.id.replace('id_compra_','')
 			//alert(id)
 			bd.remover(id)
 			window.location.reload()
@@ -211,7 +208,7 @@ function carregaListaDespesas(despesas = Array(), filtro = false) {
  }
 
  
- function pesquisarDespesa(){
+ function pesquisarCompras(){
 	let ano  = document.getElementById("ano").value
 	let mes = document.getElementById("mes").value
 	let dia = document.getElementById("dia").value
@@ -219,8 +216,8 @@ function carregaListaDespesas(despesas = Array(), filtro = false) {
 	let descricao = document.getElementById("descricao").value
 	let valor = document.getElementById("valor").value
 
-	let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor)
-	let despesas = bd.pesquisar(despesa)
-	this.carregaListaDespesas(despesas, true)
+	let compra = new Compras(ano, mes, dia, tipo, descricao, valor)
+	let compras = bd.pesquisar(compra)
+	this.carregaListaCompras(compras, true)
 
  }

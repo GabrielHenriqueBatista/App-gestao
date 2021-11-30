@@ -13,6 +13,7 @@
 
     <!-- Font Awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
     <script src="{{ asset('js/despesas.js') }}"></script>
 
 	</head>
@@ -115,19 +116,30 @@
         <div class="col">
           <table class="table" >
             <thead>
+                <tr>
+                  <th>ano</th>
+                  <th>mes</th>
+                  <th>dia</th>
+                  <th>tipo</th>
+                  <th>descricao</th>
+                  <th>valor</th>
+                  <th></th>
+                </tr>
+            </thead>
+            <tbody> 
               @foreach ($despesas as $despesa)
                 <tr>
-                  <th>{{$despesa->ano}}</th>
-                  <th>{{$despesa->mes}}</th>
-                  <th>{{$despesa->dia}}</th>
-                  <th>{{$despesa->tipo}}</th>
-                  <th>{{$despesa->descricao}}</th>
-                  <th>{{$despesa->valor}}</th>
-                  <td class="btn btn-danger"><a href="{{ route('excluir',['id'=>$despesa->id]) }}"><i class="fa fa-times"></i></a></td> 
+                  <td>{{$despesa->ano}}</td>
+                  <td>{{$despesa->mes}}</td>
+                  <td>{{$despesa->dia}}</td>
+                  <td>{{$despesa->tipo}}</td>
+                  <td>{{$despesa->descricao}}</td>
+                  <td>{{$despesa->valor}}</td>
+                  <td class="btn btn-danger"><a href="{{ route('excluir-despesa',['id'=>$despesa->id]) }}"><i class="fa fa-times"></i></a></td> 
                   <th></th>
                 </tr>
               @endforeach
-            </thead>
+            </tbody>
           </table>
         </div>
       </div>

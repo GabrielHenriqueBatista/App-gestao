@@ -13,7 +13,9 @@
 
     <!-- Font Awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <script src="{{ asset('js/compras.js') }}"></script>
+    <script src="{{ asset('js/compras.js') }}">
+    
+    </script>
 
 	</head>
 
@@ -115,7 +117,7 @@
                 <th>Data</th>
                 <th>Tipo</th>
                 <th>Descrição</th>
-                <th>Valor</th>
+                <th class="info-valor">Valor</th>
                 <th></th>
               </tr>
             </thead>

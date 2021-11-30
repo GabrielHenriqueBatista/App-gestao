@@ -205,8 +205,6 @@ function carregaListaCompras(compras = Array(), filtro = false) {
 		console.log(d)
 	})
  }
-
- 
  function pesquisarCompras(){
 	let ano  = document.getElementById("ano").value
 	let mes = document.getElementById("mes").value

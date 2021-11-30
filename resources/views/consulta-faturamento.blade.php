@@ -110,16 +110,32 @@
         <div class="col">
           <table class="table" >
             <thead>
+              
               <tr>
-                <th>Data</th>
-                <th>Tipo</th>
-                <th>Descrição</th>
-                <th>Valor</th>
+                <th>ano</th>
+                <th>mes</th>
+                <th>dia</th>
+                <th>tipo</th>
+                <th>descricao</th>
+                <th>valor</th>
                 <th></th>
               </tr>
+          
             </thead>
 
-            <tbody id="listaFaturamentos"> 
+            <tbody> 
+              @foreach ($faturamentos as $faturamento)
+                <tr>
+                  <td>{{$faturamento->ano}}</td>
+                  <td>{{$faturamento->mes}}</td>
+                  <td>{{$faturamento->dia}}</td>
+                  <td>{{$faturamento->tipo}}</td>
+                  <td>{{$faturamento->descricao}}</td>
+                  <td>{{$faturamento->valor}}</td>
+                  <td class="btn btn-danger"><a href="{{ route('excluir',['id'=>$faturamento->id]) }}"><i class="fa fa-times"></i></a></td> 
+                  <th></th>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

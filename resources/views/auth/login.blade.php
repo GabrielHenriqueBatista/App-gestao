@@ -31,14 +31,19 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Lembrar') }}</span>
                 </label>
             </div>
-
+           
             <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('Cadastre-se') }}
+                </a>
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 ml-2" href="{{ route('password.request') }}">
                         {{ __('Esqueceu sua senha?') }}
                     </a>
+                    
+                   
                 @endif
-
+        
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}
                 </x-jet-button>
