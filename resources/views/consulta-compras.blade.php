@@ -19,7 +19,7 @@
 
 	</head>
 
-  <body onload="carregaListaCompras()">
+  <body>
 
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary mb-5">
       <div class="container">
@@ -50,79 +50,44 @@
         </div>
       </div>
 
-      <div class="row mb-2">
-        <div class="col-md-2">
-          <select class="form-control" id="ano">
-            <option value="">Ano</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-          </select>
-        </div>
-
-        <div class="col-md-2">
-          <select class="form-control" id="mes">
-            <option value="">Mês</option>
-            <option value="1">Janeiro</option>
-            <option value="2">Fevereiro</option>
-            <option value="3">Março</option>
-            <option value="4">Abril</option>
-            <option value="5">Maio</option>
-            <option value="6">Junho</option>
-            <option value="7">Julho</option>
-            <option value="8">Agosto</option>
-            <option value="9">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-          </select>
-        </div>
-        
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Dia" id="dia" />
-        </div>
-
-        <div class="col-md-6">
-          <select class="form-control" id="tipo">
-            <option value="">Tipo</option>
-            <option value="1">Alimentação</option>
-            <option value="3">Bebidas</option>
-            <option value="3">Outros</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row  mb-5">
-        <div class="col-md-8">
-          <input type="text" class="form-control" placeholder="Descrição" id="descricao" />
-        </div>
-
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Valor" id="valor" />
-        </div>
-
-        <div class="col-md-2 d-flex justify-content-end">
-          <button type="button" class="btn btn-primary" onclick="pesquisarCompras()">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-
       <div class="row">
         <div class="col">
           <table class="table" >
             <thead>
               <tr>
-                <th>Data</th>
-                <th>Tipo</th>
-                <th>Descrição</th>
-                <th class="info-valor">Valor</th>
-                <th></th>
+                <th>ano</th>
+                  <th>mes</th>
+                  <th>dia</th>
+                  <th>tipo</th>
+                  <th>descricao</th>
+                  <th>valor</th>
+                  <th></th>
               </tr>
             </thead>
 
-            <tbody id="listaCompras"> 
+            <tbody>
+              @foreach ($compras as $compra)
+                <tr>
+                  <td>{{$compra->ano}}</td>
+                  <td>{{$compra->mes}}</td>
+                  <td>{{$compra->dia}}</td>
+                  <td>{{$compra->tipo}}</td>
+                  <td>{{$compra->descricao}}</td>
+                  <td class="valor">{{$compra->valor}}</td>
+                  <td class="btn btn-danger"><a href="{{ route('excluir-compras',['id'=>$compra->id]) }}"><i class="fa fa-times"></i></a></td> 
+                  <th></th>
+                </tr>   
+              @endforeach
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>Total:</th><th id="resultado"></th> 
+                  <th></th>
+                </tr>
+              </thead>
             </tbody>
           </table>
         </div>

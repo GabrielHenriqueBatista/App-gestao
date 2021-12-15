@@ -12,6 +12,14 @@ class FaturamentoController extends Controller
        return view('faturamento');
     }
     public function store(Request $request) {
+        $request->validate([
+            'ano' => 'required',
+            'mes' => 'required',
+            'dia' => 'numeric',
+            'tipo' => 'required',
+            'descricao' => 'required',
+            'valor' => 'numeric',
+        ]);
         Faturamentos::create([
             'ano' => $request->ano,
             'mes' => $request->mes,

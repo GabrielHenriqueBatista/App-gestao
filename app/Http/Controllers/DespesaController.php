@@ -12,6 +12,15 @@ class DespesaController extends Controller
         return view('despesa');
     }
     public function store(Request $request) {
+        $request->validate([
+            'ano' => 'required',
+            'mes' => 'required',
+            'dia' => 'numeric',
+            'tipo' => 'required',
+            'descricao' => 'required',
+            'valor' => 'numeric',
+        ]);
+    
         Despesas::create([
             'ano' => $request->ano,
             'mes' => $request->mes,
@@ -20,6 +29,8 @@ class DespesaController extends Controller
             'descricao' => $request->descricao,
             'valor' => $request->valor,
         ]);
+        
         return view('despesa');
     }
+
 }

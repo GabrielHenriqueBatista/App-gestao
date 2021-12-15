@@ -18,7 +18,7 @@
 
 	</head>
 
-  <body >
+  <body onload="carregaListaDespesas()" >
 
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
@@ -45,73 +45,11 @@
     </nav>
 
     <div class="container">
-      <div class="row mb-5">
-        <div class="col">
-          <h1 class="display-4">Consulta de despesas</h1>
+        <div class="row mb-5">
+          <div class="col">
+            <h1 class="display-4">Consulta de despesas</h1>
+          </div>
         </div>
-      </div>
-
-      <div class="row mb-2">
-        <div class="col-md-2">
-          <select class="form-control" id="ano" name="ano">
-            <option value="">Ano</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-          </select>
-        </div>
-
-        <div class="col-md-2">
-          <select class="form-control" id="mes" name="mes">
-            <option value="">Mês</option>
-            <option value="1">Janeiro</option>
-            <option value="2">Fevereiro</option>
-            <option value="3">Março</option>
-            <option value="4">Abril</option>
-            <option value="5">Maio</option>
-            <option value="6">Junho</option>
-            <option value="7">Julho</option>
-            <option value="8">Agosto</option>
-            <option value="9">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-          </select>
-        </div>
-        
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Dia" id="dia" name="dia"/>
-        </div>
-
-        <div class="col-md-6">
-          <select class="form-control" id="tipo" name="tipo">
-            <option value="">Tipo</option>
-            <option value="1">Alimentação</option>
-            <option value="2">Aluguel</option>
-            <option value="3">Bebidas</option>
-            <option value="4">Energia</option>
-            <option value="5">Transporte</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row  mb-5">
-        <div class="col-md-8">
-          <input type="text" class="form-control" placeholder="Descrição" id="descricao" name="descricao" />
-        </div>
-
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Valor" id="valor" name="valor"/>
-        </div>
-
-        <div class="col-md-2 d-flex justify-content-end">
-          <button type="button" class="btn btn-primary" onclick="pesquisarDespesa()">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-
       <div class="row">
         <div class="col">
           <table class="table" >
@@ -134,16 +72,29 @@
                   <td>{{$despesa->dia}}</td>
                   <td>{{$despesa->tipo}}</td>
                   <td>{{$despesa->descricao}}</td>
-                  <td>{{$despesa->valor}}</td>
+                  <td class="valor">{{$despesa->valor}}</td>
                   <td class="btn btn-danger"><a href="{{ route('excluir-despesa',['id'=>$despesa->id]) }}"><i class="fa fa-times"></i></a></td> 
                   <th></th>
-                </tr>
+                </tr>   
               @endforeach
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th>Total:</th><th id="resultado"></th>
+                  <th></th>
+                </tr>
+              </thead>
             </tbody>
           </table>
+         
+           
         </div>
       </div>
     </div>
+    
   </body>	
 
 </html>

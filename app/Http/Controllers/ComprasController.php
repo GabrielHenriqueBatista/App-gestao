@@ -1,14 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-use App\Models\Despesas;
-
+use App\Models\Compras;
 class ComprasController extends Controller
 {
+    public function compras()
+    {
+        return view('compras');
+    }
     public function store(Request $request) {
-        Despesas::create([
+        $request->validate([
+            'ano' => 'required',
+            'mes' => 'required',
+            'dia' => 'numeric',
+            'tipo' => 'required',
+            'descricao' => 'required',
+            'valor' => 'numeric',
+        ]);
+        Compras::create([
             'ano' => $request->ano,
             'mes' => $request->mes,
             'dia' => $request->dia,
@@ -19,3 +29,4 @@ class ComprasController extends Controller
         return view('compras');
     }
 }
+?>

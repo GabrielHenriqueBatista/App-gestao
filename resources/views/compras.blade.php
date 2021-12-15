@@ -18,9 +18,7 @@
 
 	</head>
 
-  <body>
-
-
+  <body> 
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary mb-5">
       <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,103 +30,94 @@
                 <button type="button" class="btn btn-light">Voltar</button>
             </a>
             <ul class="navbar-nav mr-auto ml-5">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('compras') }}">Cadastro</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('consulta-compras')}}">Consulta</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('consulta-compras') }}">Consulta</a>
                 </li>
             </ul>
-          
         </div>
       </div>
     </nav>
-
-    <div class="container">
-      <div class="row">
-        <div class="col mb-5">
-          <h1 class="display-4">Registro de Compras</h1>
-        </div>
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
       </div>
-
-      <div class="row mb-2">
-        <div class="col-md-2">
-          <select class="form-control" id="ano">
-            <option value="">Ano</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-          </select>
-        </div>
-
-        <div class="col-md-2">
-          <select class="form-control" id="mes">
-            <option value="">Mês</option>
-            <option value="1">Janeiro</option>
-            <option value="2">Fevereiro</option>
-            <option value="3">Março</option>
-            <option value="4">Abril</option>
-            <option value="5">Maio</option>
-            <option value="6">Junho</option>
-            <option value="7">Julho</option>
-            <option value="8">Agosto</option>
-            <option value="9">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-          </select>
-        </div>
-        
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Dia" id="dia" />
-        </div>
-
-        <div class="col-md-6">
-          <select class="form-control" id="tipo">
-            <option value="">Tipo</option>
-            <option value="1">Alimentação</option>
-            <option value="3">Bebidas</option>
-            <option value="3">Outros</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-8">
-          <input type="text" class="form-control" placeholder="Descrição" id="descricao" />
-        </div>
-
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Valor" id="valor" />
-        </div>
-
-        <div class="col-md-2 d-flex justify-content-end">
-          <button type="button" class="btn btn-primary" onclick="cadastrarCompra()">
-            <i class="fas fa-plus"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalRegistraCompra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div id="modal_titulo_div">
-            <h5 class="modal-title" id="modal_titulo"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+    @endif
+    <form action="{{ route('compras') }}" method="POST" name="valida">
+      @csrf
+        <div class="container">
+          <div class="row">
+            <div class="col mb-5">
+              <h1 class="display-4">Registro de nova Compra</h1>
+            </div>
           </div>
-          <div class="modal-body" id="modal_conteudo"></div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal" id="modal_btn">Voltar</button>
+
+          <div class="row mb-2">
+            <div class="col-md-2">
+              <select class="form-control" id="ano" name="ano">
+                <option value="">Ano</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+              </select>
+            </div>
+
+            <div class="col-md-2">
+              <select class="form-control" id="mes" name="mes">
+                <option value="">Mês</option>
+                <option value="Janeiro">Janeiro</option>
+                <option value="Fevereiro">Fevereiro</option>
+                <option value="Março">Março</option>
+                <option value="Abril">Abril</option>
+                <option value="Maio">Maio</option>
+                <option value="Junho">Junho</option>
+                <option value="Julho">Julho</option>
+                <option value="Agosto">Agosto</option>
+                <option value="Setembro">Setembro</option>
+                <option value="Outubro">Outubro</option>
+                <option value="Novembro">Novembro</option>
+                <option value="Dezembro">Dezembro</option>
+              </select>
+            </div>
+            
+            <div class="col-md-2">
+              <input type="text" class="form-control" placeholder="Dia" id="dia" name="dia"/>
+            </div>
+
+            <div class="col-md-6">
+              <select class="form-control" id="tipo" name="tipo">
+                <option value="">Tipo</option>
+                <option value="Alimentação">Alimentação</option>
+                <option value="Bebidas">Bebidas</option>
+                <option value="Outros">Outros</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-8">
+              <input type="text" class="form-control" placeholder="Descrição" id="descricao" name="descricao"/>
+            </div>
+
+            <div class="col-md-2">
+              <input type="text" class="form-control" placeholder="Valor" id="valor" name="valor"/>
+            </div>
+
+            <div class="col-md-2 d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">
+                Cadastrar despesas
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-
+    </form>
   </body>	
 
 </html>

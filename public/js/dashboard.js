@@ -1,4 +1,4 @@
-$(function() {
+$(function soma() {
 	var totals = $('.valor');
 	
 	var sum = 0;
@@ -8,15 +8,5 @@ $(function() {
 	  sum += ct;
 	}
 	document.getElementById("resultado").innerHTML = sum.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-	window.localStorage.setItem('total', sum);
-
+    window.localStorage.setItem('total', sum);
 });
-
-		
-
-	
-
-
-
-
-

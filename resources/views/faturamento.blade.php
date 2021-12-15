@@ -42,12 +42,21 @@
         </div>
       </div>
     </nav>
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
     <form action="{{ route('faturamento') }}" method="POST">
       @csrf
         <div class="container">
           <div class="row">
             <div class="col mb-5">
-              <h1 class="display-4">Registro de nova despesa</h1>
+              <h1 class="display-4">Registro de Novo Faturamento</h1>
             </div>
           </div>
 

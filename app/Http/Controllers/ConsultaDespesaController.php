@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Despesas;
+
 class ConsultaDespesaController extends Controller
 {
     public function consultaDespesa()
@@ -21,3 +23,5 @@ class ConsultaDespesaController extends Controller
         return redirect('consulta-despesa');
     }
 }
+  
+

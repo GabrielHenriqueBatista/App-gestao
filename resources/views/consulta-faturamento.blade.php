@@ -50,62 +50,6 @@
         </div>
       </div>
 
-      <div class="row mb-2">
-        <div class="col-md-2">
-          <select class="form-control" id="ano">
-            <option value="">Ano</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-          </select>
-        </div>
-
-        <div class="col-md-2">
-          <select class="form-control" id="mes">
-            <option value="">Mês</option>
-            <option value="1">Janeiro</option>
-            <option value="2">Fevereiro</option>
-            <option value="3">Março</option>
-            <option value="4">Abril</option>
-            <option value="5">Maio</option>
-            <option value="6">Junho</option>
-            <option value="7">Julho</option>
-            <option value="8">Agosto</option>
-            <option value="9">Setembro</option>
-            <option value="10">Outubro</option>
-            <option value="11">Novembro</option>
-            <option value="12">Dezembro</option>
-          </select>
-        </div>
-        
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Dia" id="dia" />
-        </div>
-
-        <div class="col-md-6">
-          <select class="form-control" id="tipo">
-            <option value="">Faturamento</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row  mb-5">
-        <div class="col-md-8">
-          <input type="text" class="form-control" placeholder="Descrição" id="descricao" />
-        </div>
-
-        <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Valor" id="valor" />
-        </div>
-
-        <div class="col-md-2 d-flex justify-content-end">
-          <button type="button" class="btn btn-primary" onclick="pesquisarFaturamento()">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-
       <div class="row">
         <div class="col">
           <table class="table" >
@@ -131,11 +75,22 @@
                   <td>{{$faturamento->dia}}</td>
                   <td>{{$faturamento->tipo}}</td>
                   <td>{{$faturamento->descricao}}</td>
-                  <td>{{$faturamento->valor}}</td>
+                  <td class="valor">{{$faturamento->valor}}</td>
                   <td class="btn btn-danger"><a href="{{ route('excluir',['id'=>$faturamento->id]) }}"><i class="fa fa-times"></i></a></td> 
                   <th></th>
                 </tr>
               @endforeach
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  
+                  <th>Total:</th><th id="resultado"></th> 
+                  <th></th>
+                </tr>
+            </thead>
             </tbody>
           </table>
         </div>

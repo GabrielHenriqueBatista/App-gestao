@@ -13,7 +13,7 @@
 
     <!-- Font Awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <script src="{{ asset('js/despesas.js') }}"></script>
+   
 	</head>
 
   <body>
@@ -39,6 +39,15 @@
         </div>
       </div>
     </nav>
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
     <form action="{{ route('despesas') }}" method="POST" name="valida">
       @csrf
         <div class="container">
@@ -84,10 +93,9 @@
             <div class="col-md-6">
               <select class="form-control" id="tipo" name="tipo">
                 <option value="">Tipo</option>
-                <option value="Alimentação">Alimentação</option>
                 <option value="Aluguel">Aluguel</option>
-                <option value="Bebidas">Bebidas</option>
                 <option value="Energia">Energia</option>
+                <option value="Água">Energia</option>
                 <option value="Transporte">Transporte</option>
                 <option value="Outros">Outros</option>
               </select>
@@ -104,30 +112,12 @@
             </div>
 
             <div class="col-md-2 d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" onclick="cadastrar()">
                 Cadastrar despesas
               </button>
             </div>
           </div>
         </div>
     </form>
-    <!-- Modal -->
-    <div class="modal fade" id="modalRegistraDespesa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div id="modal_titulo_div">
-            <h5 class="modal-title" id="modal_titulo"></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body" id="modal_conteudo"></div>
-          <div class="modal-footer">
-            <button type="button" data-dismiss="modal" id="modal_btn">Voltar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </body>	
 </html>
